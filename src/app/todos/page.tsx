@@ -76,9 +76,9 @@ export default function Todos() {
             <Text w='90px'>絞り込み：</Text>
           </Center>
           <Select placeholder='全て' w='192px'>
-            <option value='NOT STARTED'>未着手</option>
-            <option value='DOING'>着手</option>
-            <option value='DONE'>完了</option>
+            <option value='未着手'>未着手</option>
+            <option value='着手'>着手</option>
+            <option value='完了'>完了</option>
           </Select>
         </Box>
       </header>
