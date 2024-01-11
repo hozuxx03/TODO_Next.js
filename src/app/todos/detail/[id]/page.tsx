@@ -1,6 +1,17 @@
 'use client';
 import { Box, Flex, Input, Button, RadioGroup, Radio, Stack } from '@chakra-ui/react';
 import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
+import { doc, deleteDoc } from 'firebase/firestore';
+import { db } from '@/libs/firebase';
+
+// Todoの型を定義
+type Todo = {
+  id: string;
+  title: string;
+  detail: string;
+  status: string;
+};
+
 export default function Detail() {
   return (
     <>
@@ -16,12 +27,6 @@ export default function Detail() {
                 TODOを編集
               </Button>
             </Box>
-            <Box p='4'>
-              <Button>
-                <DeleteIcon />
-                TODOを削除
-              </Button>
-            </Box>
           </Flex>
         </header>
         <main>
@@ -33,13 +38,13 @@ export default function Detail() {
             <Box>TODO STATUS</Box>
             <RadioGroup>
               <Stack direction='row'>
-                <Radio value='High' fontWeight='bold' fontSize='24px' mr='16px'>
+                <Radio value='未着手' fontWeight='bold' fontSize='24px' mr='16px'>
                   未着手
                 </Radio>
-                <Radio value='Middle' fontWeight='bold' fontSize='24px' mr='16px'>
+                <Radio value='着手' fontWeight='bold' fontSize='24px' mr='16px'>
                   着手
                 </Radio>
-                <Radio value='Low' fontWeight='bold' fontSize='24px'>
+                <Radio value='完了' fontWeight='bold' fontSize='24px'>
                   完了
                 </Radio>
               </Stack>

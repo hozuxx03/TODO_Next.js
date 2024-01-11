@@ -18,7 +18,7 @@ import { PlusSquareIcon } from '@chakra-ui/icons';
 import { useRouter } from 'next/navigation';
 import { db } from '@/libs/firebase';
 import { useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import { doc, deleteDoc, collection, getDocs } from 'firebase/firestore';
 
 type Todo = {
   id: string;
@@ -57,6 +57,13 @@ export default function Todos() {
   const handleClickCreate = () => {
     router.push('todos/create');
   };
+  // 削除ボタンが押された時の処理
+  const handleClickDelete = async (id: string) => {
+    console.log('削除');
+    console.log(id);
+
+    await deleteDoc(doc(db, 'todos', id));
+  };
   return (
     <>
       <header>
@@ -94,11 +101,14 @@ export default function Todos() {
             </Thead>
             <Tbody>
               {/* 変数todosは配列として構成されているのでmap関数で一覧取得 */}
-              {todos.map((todo, id) => (
-                <Tr key={id}>
+              {todos.map((todo) => (
+                <Tr key={todo.id}>
                   <Td>{todo.title}</Td>
                   <Td>{todo.detail}</Td>
                   <Td>{todo.status}</Td>
+                  <Td>
+                    <Button onClick={() => handleClickDelete(todo.id)}>削除</Button>
+                  </Td>
                 </Tr>
               ))}
             </Tbody>

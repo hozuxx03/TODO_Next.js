@@ -12,10 +12,10 @@ const create = () => {
   const [todoTitle, setTodoTitle] = useState<string>('');
   const [todoDetail, setTodoDetail] = useState<string>('');
   const [todoStatus, setTodoStatus] = useState<string>('未着手');
+
   // TODOを追加ボタンが押下された時の処理
   const handleAddTodo = () => {
     console.log('TODOを追加');
-
     // todoTitle or todoDetailに何も入力されていなかったときの処理
     if (todoTitle === '' && todoDetail === '') return;
     // Firebaseにデータを追加する処理
@@ -39,11 +39,7 @@ const create = () => {
             TODO作成
           </Box>
           <Box p='4'>
-            <Button
-              onClick={() => {
-                () => handleAddTodo();
-              }}
-            >
+            <Button onClick={() => handleAddTodo()}>
               <PlusSquareIcon />
               TODOを追加
             </Button>
@@ -69,13 +65,13 @@ const create = () => {
           <Text>TODO STATUS</Text>
           <RadioGroup value={todoStatus} onChange={(e) => setTodoStatus(e)}>
             <Stack direction='row'>
-              <Radio value='High' fontWeight='bold' fontSize='24px' mr='16px'>
+              <Radio value='未着手' fontWeight='bold' fontSize='24px' mr='16px'>
                 未着手
               </Radio>
-              <Radio value='Middle' fontWeight='bold' fontSize='24px' mr='16px'>
+              <Radio value='着手' fontWeight='bold' fontSize='24px' mr='16px'>
                 着手
               </Radio>
-              <Radio value='Low' fontWeight='bold' fontSize='24px'>
+              <Radio value='完了' fontWeight='bold' fontSize='24px'>
                 完了
               </Radio>
             </Stack>
